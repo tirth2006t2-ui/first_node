@@ -44,4 +44,17 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.delete("./id",async(req,res)=>{
+  try{
+    const id=req.params.id;
+    const response=await Person.findBNyIdAndRemove(id);
+    if(!response){
+      return res.status(404).send("Person not found");
+    }
+    res.status(200).json(response);
+  } catch (err) {
+    res.status(500).send("Error deleting person: " + err.message);
+  }
+});
+
 module.exports = router;
