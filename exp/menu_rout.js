@@ -22,4 +22,21 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const id = req.params.id; // Correctly getting ID from URL
+    const data = req.body;
+    const response = await Menu.findByIdAndUpdate(id, data, {
+      new: true, // Returns the updated document
+      runValidators: true // Ensures the update follows Schema rules
+    }); 
+    if (!response) {
+      return res.status(404).send("Menu item not found");
+    }
+    res.status(200).json(response);
+  } catch (err) {
+    res.status(500).send("Error updating menu item: " + err.message);
+  }
+});
+
 module.exports = router;
