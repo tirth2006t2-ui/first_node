@@ -26,6 +26,15 @@ const person=new mongoose.Schema({
         type:String,
         required:false,
         unique:true
+    },
+    username:{
+        type:String,
+        required:true,
+        unique:true
+    },
+    password:{
+        type:String,
+        required:true,
     }
 });
 const Person=mongoose.model("Person",person);
